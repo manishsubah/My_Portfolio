@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/widgets/section_title.dart';
 import '../../../../core/widgets/neumorphic_card.dart';
 import '../../../../core/routing/app_router.dart';
+import '../../../../core/theme/theme_cubit.dart';
 
 @RoutePage()
 class AboutPage extends StatelessWidget {
@@ -16,6 +19,52 @@ class AboutPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About Me'),
+        actions: [
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return Tooltip(
+                message: state.isDarkMode 
+                    ? 'Switch to Light Mode' 
+                    : 'Switch to Dark Mode',
+                child: IconButton(
+                  icon: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder: (child, animation) {
+                      return RotationTransition(
+                        turns: Tween<double>(begin: 0.0, end: 0.5).animate(
+                          CurvedAnimation(
+                            parent: animation,
+                            curve: Curves.easeInOut,
+                          ),
+                        ),
+                        child: ScaleTransition(
+                          scale: Tween<double>(begin: 0.8, end: 1.0).animate(
+                            CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.easeInOut,
+                            ),
+                          ),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      state.isDarkMode 
+                          ? Icons.light_mode 
+                          : Icons.dark_mode,
+                      key: ValueKey<bool>(state.isDarkMode),
+                    ),
+                  ),
+                  onPressed: () {
+                    // Haptic feedback for better UX
+                    HapticFeedback.lightImpact();
+                    context.read<ThemeCubit>().toggleTheme();
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -26,18 +75,12 @@ class AboutPage extends StatelessWidget {
             NeumorphicCard(
               child: Column(
                 children: [
-                  // Profile Image Placeholder
+                  // Profile Image
                   Container(
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [
-                          theme.colorScheme.primary,
-                          theme.colorScheme.secondary,
-                        ],
-                      ),
                       boxShadow: [
                         BoxShadow(
                           color: theme.colorScheme.primary.withOpacity(0.3),
@@ -45,11 +88,36 @@ class AboutPage extends StatelessWidget {
                           spreadRadius: 5,
                         ),
                       ],
+                      border: Border.all(
+                        color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                        width: 3,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.person,
-                      size: 80,
-                      color: Colors.white,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/icons/profile.jpg',
+                        width: 150,
+                        height: 150,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  theme.colorScheme.primary,
+                                  theme.colorScheme.secondary,
+                                ],
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.person,
+                              size: 80,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),

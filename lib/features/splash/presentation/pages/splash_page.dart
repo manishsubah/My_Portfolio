@@ -83,25 +83,41 @@ class _SplashPageState extends State<SplashPage>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Logo placeholder - replace with actual logo
+                      // Profile Image
                       Container(
                         width: 120,
                         height: 120,
                         decoration: BoxDecoration(
-                          color: Colors.white,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withOpacity(0.3),
                               blurRadius: 20,
                               spreadRadius: 5,
                             ),
                           ],
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 3,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.person,
-                          size: 60,
-                          color: theme.colorScheme.primary,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/icons/profile.jpg',
+                            width: 120,
+                            height: 120,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.white,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 60,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -132,4 +148,5 @@ class _SplashPageState extends State<SplashPage>
     );
   }
 }
+
 

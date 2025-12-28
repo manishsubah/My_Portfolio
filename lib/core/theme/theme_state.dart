@@ -9,3 +9,4 @@ class ThemeState extends Equatable {
   List<Object> get props => [isDarkMode];
 }
 
+

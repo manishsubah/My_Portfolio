@@ -45,10 +45,10 @@ Categorized into:
 - Share Resume
 
 ### ✔ Contact Me
-- Email: manishranjan.soft@gmail.com
-- Phone: +91 8298285796
-- LinkedIn: manishranjansubah
-- GitHub: manishsubah
+- Email contact
+- Phone contact (configurable, hidden in repository)
+- LinkedIn profile
+- GitHub profile
 - Contact form (optional backend integration)
 
 ## 🎨 UI/UX Design
@@ -130,11 +130,16 @@ lib/
    flutter pub run build_runner build --delete-conflicting-outputs
    ```
 
-4. **Add your resume PDF**
+4. **Configure contact information (IMPORTANT)**
+   - Copy the config template: `cp lib/core/config/app_config.dart.example lib/core/config/app_config.dart`
+   - Edit `lib/core/config/app_config.dart` and add your contact information
+   - This file is gitignored for security - your sensitive data won't be committed
+
+5. **Add your resume PDF**
    - Place your resume PDF file at `assets/resume/resume.pdf`
    - The app will use this file for the resume viewer
 
-5. **Run the app**
+6. **Run the app**
    ```bash
    flutter run
    ```
@@ -152,6 +157,19 @@ flutter build ios --release
 ```
 
 ## 🔧 Configuration
+
+### Setting Up Contact Information (Required)
+1. Copy the config template:
+   ```bash
+   cp lib/core/config/app_config.dart.example lib/core/config/app_config.dart
+   ```
+2. Edit `lib/core/config/app_config.dart` and fill in your contact details:
+   - Email address
+   - Phone number (optional - can be hidden by setting `showPhoneNumber: false`)
+   - LinkedIn username and URL
+   - GitHub username and URL
+   - Full name and professional title
+3. **Security Note**: The `app_config.dart` file is gitignored, so your sensitive information won't be committed to version control.
 
 ### Adding Your Resume
 1. Place your resume PDF file in `assets/resume/resume.pdf`
@@ -189,9 +207,10 @@ This project is private and not licensed for public use.
 **Manish Ranjan** – Mobile App Developer (Android & Flutter)
 
 - 📧 Email: manishranjan.soft@gmail.com
-- 📞 Phone: +91 8298285796
 - 🔗 LinkedIn: [manishranjansubah](https://linkedin.com/in/manishranjansubah)
 - 🔗 GitHub: [manishsubah](https://github.com/manishsubah)
+
+*For phone contact, please use the app's Contact tab after installation.*
 
 ---
 

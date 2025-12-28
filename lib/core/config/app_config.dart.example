@@ -1,0 +1,28 @@
+/// App Configuration
+/// 
+/// IMPORTANT: Copy this file to app_config.dart and fill in your actual values.
+/// The app_config.dart file is gitignored for security.
+/// 
+/// To use:
+/// 1. Copy this file: cp lib/core/config/app_config.dart.example lib/core/config/app_config.dart
+/// 2. Replace the placeholder values with your actual contact information
+/// 3. The app_config.dart file will not be committed to version control
+
+class AppConfig {
+  // Contact Information
+  static const String email = 'your.email@example.com';
+  static const String phone = '+91 XXXXXXXXXX';
+  static const String phoneUrl = 'tel:+91XXXXXXXXXX'; // Phone number without spaces for URL
+  static const String linkedInUsername = 'your-linkedin-username';
+  static const String linkedInUrl = 'https://linkedin.com/in/your-linkedin-username';
+  static const String githubUsername = 'your-github-username';
+  static const String githubUrl = 'https://github.com/your-github-username';
+  
+  // Personal Information
+  static const String fullName = 'Your Full Name';
+  static const String title = 'Your Professional Title';
+  
+  // Privacy: Set to true to hide phone number from contact page
+  static const bool showPhoneNumber = true;
+}
+

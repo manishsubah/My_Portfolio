@@ -7,16 +7,24 @@
    flutter pub get
    ```
 
-2. **Generate code (AutoRoute & Injectable):**
+2. **Configure contact information (REQUIRED):**
+   - Copy the config template:
+     ```bash
+     cp lib/core/config/app_config.dart.example lib/core/config/app_config.dart
+     ```
+   - Edit `lib/core/config/app_config.dart` and add your contact information
+   - **Note**: This file is gitignored for security
+
+3. **Generate code (AutoRoute & Injectable):**
    ```bash
    flutter pub run build_runner build --delete-conflicting-outputs
    ```
 
-3. **Add your resume PDF:**
+4. **Add your resume PDF:**
    - Place your resume PDF at `assets/resume/resume.pdf`
    - If you don't have a resume PDF, the app will show a placeholder
 
-4. **Run the app:**
+5. **Run the app:**
    ```bash
    flutter run
    ```
@@ -24,6 +32,8 @@
 ## Important Notes
 
 - **Code Generation Required**: This project uses AutoRoute and Injectable which require code generation. You MUST run `build_runner` before the app will compile.
+
+- **Contact Configuration**: You MUST set up `lib/core/config/app_config.dart` before running the app. Copy from the example file and fill in your contact details. This file is gitignored for security.
 
 - **Resume PDF**: The resume viewer expects a PDF file at `assets/resume/resume.pdf`. If the file doesn't exist, a placeholder message will be shown.
 
@@ -50,4 +60,5 @@ flutter pub get
 The following files are auto-generated and should NOT be edited manually:
 - `lib/core/routing/app_router.gr.dart`
 - `lib/core/di/injection.config.dart`
+
 

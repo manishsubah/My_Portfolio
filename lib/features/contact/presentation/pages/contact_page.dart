@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/widgets/section_title.dart';
 import '../../../../core/widgets/neumorphic_card.dart';
+import '../../../../core/config/app_config.dart';
 
 @RoutePage()
 class ContactPage extends StatelessWidget {
@@ -31,11 +32,11 @@ class ContactPage extends StatelessWidget {
             _buildContactCard(
               context,
               'Email',
-              'manishranjan.soft@gmail.com',
+              AppConfig.email,
               Icons.email,
               Colors.red,
               () async {
-                final uri = Uri.parse('mailto:manishranjan.soft@gmail.com');
+                final uri = Uri.parse('mailto:${AppConfig.email}');
                 if (await canLaunchUrl(uri)) {
                   await launchUrl(uri);
                 }
@@ -43,29 +44,31 @@ class ContactPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            _buildContactCard(
-              context,
-              'Phone',
-              '+91 8298285796',
-              Icons.phone,
-              Colors.green,
-              () async {
-                final uri = Uri.parse('tel:+918298285796');
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri);
-                }
-              },
-            ),
-            const SizedBox(height: 16),
+            // Conditionally show phone number based on config
+            if (AppConfig.showPhoneNumber)
+              _buildContactCard(
+                context,
+                'Phone',
+                AppConfig.phone,
+                Icons.phone,
+                Colors.green,
+                () async {
+                  final uri = Uri.parse(AppConfig.phoneUrl);
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri);
+                  }
+                },
+              ),
+            if (AppConfig.showPhoneNumber) const SizedBox(height: 16),
 
             _buildContactCard(
               context,
               'LinkedIn',
-              'manishranjansubah',
+              AppConfig.linkedInUsername,
               Icons.linked_camera,
               Colors.blue,
               () async {
-                final uri = Uri.parse('https://linkedin.com/in/manishranjansubah');
+                final uri = Uri.parse(AppConfig.linkedInUrl);
                 if (await canLaunchUrl(uri)) {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 }
@@ -76,11 +79,11 @@ class ContactPage extends StatelessWidget {
             _buildContactCard(
               context,
               'GitHub',
-              'manishsubah',
+              AppConfig.githubUsername,
               Icons.code,
               Colors.black,
               () async {
-                final uri = Uri.parse('https://github.com/manishsubah');
+                final uri = Uri.parse(AppConfig.githubUrl);
                 if (await canLaunchUrl(uri)) {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 }
