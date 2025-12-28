@@ -135,11 +135,17 @@ lib/
    - Edit `lib/core/config/app_config.dart` and add your contact information
    - This file is gitignored for security - your sensitive data won't be committed
 
-5. **Add your resume PDF**
+5. **Generate app icons from profile image**
+   - Install Python dependencies: `pip install Pillow`
+   - Run the icon generator: `python scripts/generate_app_icons.py`
+   - This will create all required icon sizes for Android and iOS from your profile image
+   - See `scripts/README.md` for more details
+
+6. **Add your resume PDF**
    - Place your resume PDF file at `assets/resume/resume.pdf`
    - The app will use this file for the resume viewer
 
-6. **Run the app**
+7. **Run the app**
    ```bash
    flutter run
    ```
@@ -170,6 +176,23 @@ flutter build ios --release
    - GitHub username and URL
    - Full name and professional title
 3. **Security Note**: The `app_config.dart` file is gitignored, so your sensitive information won't be committed to version control.
+
+### Generating App Icons
+The app uses your profile image as the app icon. To generate all required icon sizes:
+
+1. **Using Python Script (Recommended)**:
+   ```bash
+   pip install Pillow
+   python scripts/generate_app_icons.py
+   ```
+   This generates circular icons for all Android and iOS sizes automatically.
+
+2. **Using Flutter Launcher Icons (Alternative)**:
+   - Place a 1024x1024 icon at `assets/icons/app_icon.png`
+   - Uncomment the `flutter_icons` section in `pubspec.yaml`
+   - Run: `flutter pub run flutter_launcher_icons:main`
+
+See `scripts/README.md` for detailed instructions.
 
 ### Adding Your Resume
 1. Place your resume PDF file in `assets/resume/resume.pdf`

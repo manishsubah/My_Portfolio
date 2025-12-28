@@ -46,3 +46,10 @@ app.*.map.json
 
 # Secure configuration files (contains sensitive information)
 lib/core/config/app_config.dart
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python

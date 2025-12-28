@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Modify this file to customize your launch splash screen -->
+<!-- Native splash screen matching custom Flutter splash screen -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="?android:colorBackground" />
-
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+    <!-- Gradient background matching Flutter splash (Flutter Blue to Android Green) -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#0066FF"
+                android:endColor="#00D27F" />
+        </shape>
+    </item>
+    <!-- Profile image centered (will be loaded from assets) -->
+    <!-- Note: For native splash, we use a simple approach - the gradient matches the Flutter splash -->
 </layer-list>
