@@ -6,103 +6,116 @@ A modern, clean, and fully responsive Flutter portfolio application showcasing w
 
 This mobile portfolio app is designed to highlight professional journey, technical skills, work experience, and major projects. It follows clean architecture principles, modern UI patterns, and provides an interactive way for companies and recruiters to explore work.
 
-## ✨ Features
+---
 
-### ✔ Splash Screen
-- Smooth logo + name animation
-- Tagline: Mobile App Developer — Android & Flutter
+## ✅ What Works
 
-### ✔ Home / About Me
-- Name and title display
-- Summary of 2+ years experience
-- Highlights of Android + Flutter skills
-- Quick navigation buttons
+### Core Features
+- ✅ **Splash Screen** - Custom animated splash screen with profile picture and gradient background
+- ✅ **Home / About Me** - Profile information, experience summary, and quick navigation
+- ✅ **Skills Page** - Categorized skills display (Languages, Frameworks, Tools, Databases)
+- ✅ **Experience Page** - Work history with detailed responsibilities
+- ✅ **Projects Page** - Showcase of major projects with technologies used
+- ✅ **Certifications Page** - Professional certifications display
+- ✅ **Resume Viewer** - PDF viewing, download, and share functionality
+- ✅ **Contact Page** - Contact information with email, phone, LinkedIn, GitHub, and contact form
 
-### ✔ Skills
-Categorized into:
-- **Languages**: Kotlin, Java, Dart
-- **Frameworks & Libraries**: Flutter, Jetpack Compose, Retrofit, Room DB, Firebase, Bloc, Provider, Riverpod, Mason, OkHttp, Espresso
-- **Tools**: Android Studio, VS Code, GitHub, Gradle, Firebase Console, Postman, GitHub Actions
-- **Databases**: Room DB, SQL, Firestore, sqflite
+### UI/UX Features
+- ✅ **Light/Dark Mode** - Theme toggle in app bar with smooth transitions
+- ✅ **Modern Design** - Neumorphic cards, glassmorphism panels, animated transitions
+- ✅ **Navigation** - Bottom navigation bar and drawer menu
+- ✅ **Responsive Layout** - Works on different screen sizes
+- ✅ **Profile Image** - Integrated in splash screen, home page, and drawer
 
-### ✔ Experience
-- Software Engineer – 12th Wonder Research India Pvt. Ltd
-- April 2023 – Present | Remote / Pune
-- Detailed responsibilities and achievements
+### Technical Implementation
+- ✅ **Clean Architecture** - Feature-based structure with separation of concerns
+- ✅ **State Management** - Flutter Bloc for theme management
+- ✅ **Navigation** - AutoRoute for type-safe navigation
+- ✅ **Dependency Injection** - GetIt + Injectable setup
+- ✅ **App Icons** - Python script generates all required icon sizes from profile image
+- ✅ **Secure Configuration** - Contact information stored securely (gitignored)
 
-### ✔ Projects
-1. **Titan TLM** - Test Lifecycle Management app
-2. **Live Assist** - Product scanning and video consultation app
-3. **WonderHealth IFT** - Fasting + health tracking application
+### Platform Support
+- ✅ **Android** - Fully functional with custom app icon
+- ✅ **iOS** - Configured and ready (requires Mac for building)
 
-### ✔ Certifications
-- AI Tools & ChatGPT – Be10x
-- Java & Data Structures – Apna College
+---
 
-### ✔ Resume Viewer
-- In-app PDF Viewer
-- Download Resume
-- Share Resume
+## ❌ What is Broken / Known Issues
 
-### ✔ Contact Me
-- Email contact
-- Phone contact (configurable, hidden in repository)
-- LinkedIn profile
-- GitHub profile
-- Contact form (optional backend integration)
+### Splash Screen
+- ⚠️ **Flutter Logo Screen** - Brief Flutter engine initialization screen appears before custom splash (this is a Flutter engine limitation, cannot be completely removed)
+- ⚠️ **Native Launch Screen** - Gradient background shows, but Flutter logo may still appear briefly during engine initialization
 
-## 🎨 UI/UX Design
+### Resume Viewer
+- ⚠️ **PDF Loading** - Requires `resume.pdf` file in `assets/resume/` folder. If missing, shows placeholder message
+- ⚠️ **Share Functionality** - Currently commented out in code (needs testing on physical device)
 
-### Theme
-- Clean minimal design
-- Light/Dark mode support
-- Flutter Blue: #0066FF
-- Android Green: #00D27F
+### Contact Form
+- ⚠️ **Backend Integration** - Contact form submission is not connected to any backend API (shows placeholder message)
+- ⚠️ **Form Validation** - No input validation implemented yet
 
-### Components
-- Neumorphic cards
-- Glassmorphism panels
-- Animated transitions
-- Skill chips
-- Modern Material Design 3
+### Platform-Specific
+- ⚠️ **iOS Build** - Requires Mac and Xcode for building (not tested on iOS device)
+- ⚠️ **Android 12+** - Adaptive icons may need additional configuration for Android 12+
 
-### Navigation
-- Bottom navigation (Home, Skills, Projects, Contact)
-- Drawer for Resume, Certifications, Experience, Settings
+### Code Generation
+- ⚠️ **Build Runner** - Must run `flutter pub run build_runner build --delete-conflicting-outputs` after cloning
+- ⚠️ **Generated Files** - AutoRoute and Injectable generated files need to be regenerated if routes change
 
-## 🏗 App Architecture
+### Performance
+- ⚠️ **Initial Load** - First app launch may show Flutter initialization screen briefly
+- ⚠️ **Image Loading** - Profile image loading could be optimized with caching
 
-Follows Flutter Clean Architecture with feature-based structure:
+---
 
-```
-lib/
- ├─ core/
- │   ├─ theme/          # Theme configuration & theme cubit
- │   ├─ routing/         # AutoRoute configuration
- │   ├─ widgets/         # Reusable widgets
- │   └─ di/              # Dependency injection setup
- ├─ features/
- │   ├─ splash/          # Splash screen
- │   ├─ about/           # About/Home page
- │   ├─ skills/          # Skills showcase
- │   ├─ experience/      # Work experience
- │   ├─ projects/        # Projects showcase
- │   ├─ certifications/  # Certifications
- │   ├─ resume/          # Resume viewer
- │   └─ contact/         # Contact information
- ├─ data/                # Data layer (repositories, datasources)
- ├─ domain/              # Domain layer (entities, usecases)
- └─ presentation/        # Presentation layer (pages, widgets, bloc)
-```
+## 🎯 What I Want to Do Next
 
-### Tech Stack
-- **State Management**: Flutter Bloc
-- **Navigation**: AutoRoute
-- **Dependency Injection**: GetIt + Injectable
-- **PDF Viewer**: pdfx
-- **URL Launcher**: url_launcher
-- **Share**: share_plus
-- **Storage**: shared_preferences
+### High Priority
+- [ ] **Backend Integration** - Connect contact form to Firebase or backend API
+- [ ] **Form Validation** - Add proper input validation and error handling for contact form
+- [ ] **Resume PDF** - Add actual resume PDF to assets folder
+- [ ] **Share Functionality** - Test and fix resume sharing on physical devices
+- [ ] **iOS Testing** - Test and optimize for iOS devices
+
+### Features to Add
+- [ ] **Lottie Animations** - Replace static splash screen with Lottie animations
+- [ ] **Offline Support** - Add local caching for offline viewing
+- [ ] **Firebase Analytics** - Track visitor analytics
+- [ ] **Push Notifications** - For contact form submissions (optional)
+- [ ] **Testimonials Section** - Add testimonials/recommendations page
+- [ ] **Blog Section** - Add "My Blog" feature mentioned in navigation
+- [ ] **Play Store Integration** - In-app previews for projects available on Play Store
+
+### UI/UX Improvements
+- [ ] **Smooth Animations** - Add more micro-interactions and page transitions
+- [ ] **Loading States** - Add skeleton loaders for better UX
+- [ ] **Error Handling** - Better error messages and retry mechanisms
+- [ ] **Accessibility** - Improve screen reader support and accessibility features
+- [ ] **Localization** - Add multi-language support (i18n)
+
+### Technical Improvements
+- [ ] **Unit Tests** - Add unit tests for business logic
+- [ ] **Widget Tests** - Add widget tests for UI components
+- [ ] **Integration Tests** - Add end-to-end testing
+- [ ] **CI/CD Pipeline** - Set up GitHub Actions for automated builds
+- [ ] **Code Documentation** - Add comprehensive code comments and documentation
+- [ ] **Performance Optimization** - Profile and optimize app performance
+- [ ] **State Management** - Consider migrating to Riverpod for better testability
+
+### Platform Enhancements
+- [ ] **Android 12+ Adaptive Icons** - Full support for Android 12+ adaptive icons
+- [ ] **iOS App Store Optimization** - Prepare for App Store submission
+- [ ] **Web Support** - Make the app work on web platform
+- [ ] **Desktop Support** - Consider Windows/Mac/Linux support
+
+### Content Updates
+- [ ] **More Projects** - Add additional projects to showcase
+- [ ] **Updated Experience** - Keep work experience up to date
+- [ ] **Skills Updates** - Add new skills as they're acquired
+- [ ] **Certifications** - Add new certifications as earned
+
+---
 
 ## 📦 Setup Instructions
 
@@ -125,7 +138,7 @@ lib/
    flutter pub get
    ```
 
-3. **Generate code (for AutoRoute and Injectable)**
+3. **Generate code (AutoRoute & Injectable)**
    ```bash
    flutter pub run build_runner build --delete-conflicting-outputs
    ```
@@ -161,6 +174,8 @@ flutter build apk --release
 ```bash
 flutter build ios --release
 ```
+
+---
 
 ## 🔧 Configuration
 
@@ -208,22 +223,56 @@ Edit `lib/core/theme/app_theme.dart` to customize:
 - Projects: Edit `lib/features/projects/presentation/pages/projects_page.dart`
 - Certifications: Edit `lib/features/certifications/presentation/pages/certifications_page.dart`
 
+---
+
+## 🏗 App Architecture
+
+Follows Flutter Clean Architecture with feature-based structure:
+
+```
+lib/
+ ├─ core/
+ │   ├─ theme/          # Theme configuration & theme cubit
+ │   ├─ routing/         # AutoRoute configuration
+ │   ├─ widgets/         # Reusable widgets
+ │   ├─ di/              # Dependency injection setup
+ │   └─ config/          # App configuration (gitignored)
+ ├─ features/
+ │   ├─ splash/          # Splash screen
+ │   ├─ about/           # About/Home page
+ │   ├─ skills/          # Skills showcase
+ │   ├─ experience/      # Work experience
+ │   ├─ projects/        # Projects showcase
+ │   ├─ certifications/  # Certifications
+ │   ├─ resume/          # Resume viewer
+ │   └─ contact/         # Contact information
+ ├─ data/                # Data layer (repositories, datasources)
+ ├─ domain/              # Domain layer (entities, usecases)
+ └─ presentation/        # Presentation layer (pages, widgets, bloc)
+```
+
+### Tech Stack
+- **State Management**: Flutter Bloc
+- **Navigation**: AutoRoute
+- **Dependency Injection**: GetIt + Injectable
+- **PDF Viewer**: Syncfusion Flutter PDF Viewer
+- **URL Launcher**: url_launcher
+- **Share**: share_plus
+- **Storage**: shared_preferences
+
+---
+
 ## 📱 Screenshots
 
 *Add screenshots of your app here*
 
-## 🚧 Future Enhancements
-
-- [ ] In-app Play Store previews
-- [ ] Firebase analytics (for visitor tracking)
-- [ ] Offline support with local caching
-- [ ] Contact form with Firebase/Backend API integration
-- [ ] Lottie animations for splash screen
-- [ ] Testimonials section
+---
 
 ## 📄 License
 
 This project is private and not licensed for public use.
+
+---
 
 ## 👨‍💻 Contact
 
@@ -237,4 +286,6 @@ This project is private and not licensed for public use.
 
 ---
 
-Built with ❤️ using Flutter
+**Built with ❤️ using Flutter**
+
+*Last Updated: December 2024*

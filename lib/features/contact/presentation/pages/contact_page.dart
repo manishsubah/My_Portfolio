@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/widgets/section_title.dart';
 import '../../../../core/widgets/neumorphic_card.dart';
@@ -36,9 +37,36 @@ class ContactPage extends StatelessWidget {
               Icons.email,
               Colors.red,
               () async {
-                final uri = Uri.parse('mailto:${AppConfig.email}');
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri);
+                try {
+                  final uri = Uri.parse('mailto:${AppConfig.email}');
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Could not launch email app. Email: ${AppConfig.email}'),
+                          action: SnackBarAction(
+                            label: 'Copy',
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(text: AppConfig.email));
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Email copied to clipboard')),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error opening email: $e')),
+                    );
+                  }
                 }
               },
             ),
@@ -53,9 +81,25 @@ class ContactPage extends StatelessWidget {
                 Icons.phone,
                 Colors.green,
                 () async {
-                  final uri = Uri.parse(AppConfig.phoneUrl);
-                  if (await canLaunchUrl(uri)) {
-                    await launchUrl(uri);
+                  try {
+                    final uri = Uri.parse(AppConfig.phoneUrl);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    } else {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Could not launch phone dialer. Phone: ${AppConfig.phone}'),
+                          ),
+                        );
+                      }
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error opening phone dialer: $e')),
+                      );
+                    }
                   }
                 },
               ),
@@ -68,9 +112,47 @@ class ContactPage extends StatelessWidget {
               Icons.linked_camera,
               Colors.blue,
               () async {
-                final uri = Uri.parse(AppConfig.linkedInUrl);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                try {
+                  // Try LinkedIn app first, then fallback to web
+                  final linkedInAppUri = Uri.parse('linkedin://profile/${AppConfig.linkedInUsername}');
+                  final linkedInWebUri = Uri.parse('https://www.linkedin.com/in/${AppConfig.linkedInUsername}');
+                  
+                  bool launched = false;
+                  
+                  // Try app first
+                  if (await canLaunchUrl(linkedInAppUri)) {
+                    launched = await launchUrl(linkedInAppUri, mode: LaunchMode.externalApplication);
+                  }
+                  
+                  // If app didn't launch, try web
+                  if (!launched && await canLaunchUrl(linkedInWebUri)) {
+                    launched = await launchUrl(linkedInWebUri, mode: LaunchMode.externalApplication);
+                  }
+                  
+                  if (!launched && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Could not launch LinkedIn. Opening in browser...'),
+                        action: SnackBarAction(
+                          label: 'Copy URL',
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: linkedInWebUri.toString()));
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('LinkedIn URL copied to clipboard')),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error opening LinkedIn: $e')),
+                    );
+                  }
                 }
               },
             ),
@@ -83,9 +165,47 @@ class ContactPage extends StatelessWidget {
               Icons.code,
               Colors.black,
               () async {
-                final uri = Uri.parse(AppConfig.githubUrl);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                try {
+                  // Try GitHub app first, then fallback to web
+                  final githubAppUri = Uri.parse('github://user?username=${AppConfig.githubUsername}');
+                  final githubWebUri = Uri.parse('https://github.com/${AppConfig.githubUsername}');
+                  
+                  bool launched = false;
+                  
+                  // Try app first
+                  if (await canLaunchUrl(githubAppUri)) {
+                    launched = await launchUrl(githubAppUri, mode: LaunchMode.externalApplication);
+                  }
+                  
+                  // If app didn't launch, try web
+                  if (!launched && await canLaunchUrl(githubWebUri)) {
+                    launched = await launchUrl(githubWebUri, mode: LaunchMode.externalApplication);
+                  }
+                  
+                  if (!launched && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Could not launch GitHub. Opening in browser...'),
+                        action: SnackBarAction(
+                          label: 'Copy URL',
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: githubWebUri.toString()));
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('GitHub URL copied to clipboard')),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error opening GitHub: $e')),
+                    );
+                  }
                 }
               },
             ),
