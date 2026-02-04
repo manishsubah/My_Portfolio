@@ -56,7 +56,6 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Haptic feedback for better UX
                     HapticFeedback.lightImpact();
                     context.read<ThemeCubit>().toggleTheme();
                   },
